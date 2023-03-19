@@ -1,0 +1,9 @@
+torch
+matplotlib.pyplot
+json
+nltk
+numpy
+
+# para instalar las dependencias de Python listadas en el archivo requirement.txt usar:
+# pip install -r requirements.txt
+# esto instalar las dependencias de en el entorno virtual.
