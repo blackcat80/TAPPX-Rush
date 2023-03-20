@@ -1,6 +1,9 @@
 
-import json     #libreria para cargar los datos de  archivos JSON
-import spacy    
+import json
+
+from matplotlib.pyplot import text     #libreria para cargar los datos de  archivos JSON
+#import spacy    
+import pandas as pd
 
 
 # Cargar los datos del archivo de artículos de prensa
@@ -12,19 +15,41 @@ with open('articles.json', 'r') as f:
 
 with open('videos.json', 'r') as f:
     videos = json.load(f)
-
 # Almacenamos los id de los artículos
 # Almacenamos los textos de los artículos antes de limpiar
 
+df = pd.DataFrame(data_articulos).transpose()
+# print(df['text'][0])
+
+
 id_articulos = []  
-texto_articulos = [] 
 
-for id_del_articulo in data_articulos:   
+for key, value in enumerate(data_articulos):
+    id_articulos.append(value)
+# print(id_articulos)
+
+
+
+def extraer_texto(dataframe, column):
+    texto_articulos =[] 
+
+    for key, value in enumerate(dataframe[column]):
+        texto_articulos.append(value)
+    return texto_articulos
+
+content = extraer_texto(df, 'title')
+for i in content:
+    print(i)
+
+
+
+"""for id_del_articulo in data_articulos:   
     id_articulos.append(id_del_articulo)
-    for texto_articulo in [data_articulos]:
-        texto_articulos.append(texto_articulo)
+     for texto_articulo in [id_del_articulo]["text"]:
 
-print(id_articulos)
+           texto_articulos.append(texto_articulo)
+
+print(id_articulos)"""
       
 
 #print(texto_articulos) 

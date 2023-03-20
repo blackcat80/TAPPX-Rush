@@ -75,3 +75,5 @@ for id, dictt in data.items():
 
 
 
+{ 
+    "id_articles": {title: "Receta tortilla", keywords:[huevos, leche], categoriaIAB: [{cena: "lunes"}, {comida: "martes"}], text: "Esta receta se ha hecho con mucho amor", url: "http.google.com"},} 
