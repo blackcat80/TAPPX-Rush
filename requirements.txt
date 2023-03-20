@@ -1,6 +1,10 @@
+json
+spacy
+
+
+# estos ya veremos si los terminamos usando o no
 torch
 matplotlib.pyplot
-json
 nltk
 numpy
 

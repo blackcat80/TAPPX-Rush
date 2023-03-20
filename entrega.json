@@ -1,0 +1,16 @@
+
+{
+    "id-del-articulo1": {
+        "id_del_video_relacionado1": {
+            "score":"score-de-la-relación"
+        },
+        "id_del_video_relacionado2":{
+            "score":"score-de-la-relación"
+        }             
+    },
+    "id-del-articulo2": {
+        "id_del_video_relacionado1": {
+            "score":"score-de-la-relacion"
+        }             
+    }           
+}
