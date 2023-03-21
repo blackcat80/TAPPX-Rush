@@ -102,3 +102,20 @@ for id_articulo in id_articulos:
 
     if id_videos_relacionados:
         print(f"Los vídeos que se relacionan mejor con tu artículo son:", ', '.join(id_videos_relacionados))
+
+""""Este código parece ser utilizado para obtener puntuaciones de palabras clave en videos y establecer relaciones entre artículos y videos.
+
+En la primera parte del código, se crea un diccionario vacío llamado keyword_scores. Luego, para cada palabra clave en keywords_articulos, se realizan los siguientes pasos:
+
+Se procesa la palabra clave utilizando la función preprocess_text.
+Se inicializa la puntuación de la palabra clave a 0.
+Para cada texto de video en text_videos, se procesa el texto utilizando preprocess_text y se calcula el número total de palabras en el texto de video.
+Para cada token en el texto de video, si el token está en la lista de tokens de la palabra clave, se suma 1 dividido por el número total de palabras en el texto de video a la puntuación de la palabra clave.
+En la segunda parte del código, se crea un diccionario vacío llamado relaciones. Luego, para cada id_articulo en id_articulos, se realiza lo siguiente:
+
+Se crea una lista vacía llamada id_videos_relacionados.
+Para cada id_video en id_videos, se inicializa la puntuación del video a 0.
+Para cada palabra clave en keywords_articulos, si la palabra clave tiene una puntuación en keyword_scores y la palabra clave también está en las palabras clave del video correspondiente en keywords_videos, se suma la puntuación de la palabra clave a la puntuación del video.
+Si la puntuación del video es mayor que 0, se agrega el id_video a la lista id_videos_relacionados.
+Se agrega la lista id_videos_relacionados al diccionario relaciones con la clave id_articulo.
+En resumen, este código parece ser utilizado para analizar palabras clave en videos y encontrar relaciones entre artículos y videos basados en estas palabras clave."""
