@@ -39,12 +39,14 @@ class_videos = extraer_texto(data_videos, ['categoriaIAB'])
 text_videos = extraer_texto(data_videos, ['text'])
 url_videos = extraer_texto(data_videos, ['url'])
 
+
 #print(id_videos)   
 #print(keywords_videos)
 #print(class_videos)  # pdte que solo imprima el valor, no todo. 
 #print(text_videos)
 #print(url_videos)
 
-# print(data_articulos.columns)                                  # Muestra los parametros de las columnas del Dataframe.
+#print(data_articulos.columns)                                  # Muestra los parametros de las columnas del Dataframe.
 
 
+print(data_articulos)
