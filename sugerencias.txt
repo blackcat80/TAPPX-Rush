@@ -4,8 +4,9 @@ NLP = Natural Language Processing
 
 CORRECION GRAMATICA DE TEXTO 
     . SPELLCHEK 
-    . TEXTBLOB        
-    . pyspellchecker  
+    . TEXTBLOB           NLP
+    . pyspellchecker     NLP
+    . spacy              NLP
 
 ANALISIS Y MANIPULACION DE DATOS   
     . PANDAS
@@ -39,3 +40,26 @@ PYSPELLCHECKER:
 
     url: https://www.tutorialspoint.com/python_text_processing/python_spelling_check.htm
 
+SPACY:
+
+    SpaCy es una biblioteca de procesamiento de lenguaje natural (NLP) en Python que se utiliza para realizar tareas de análisis de texto y extracción de información. SpaCy es una biblioteca muy popular en el campo de NLP y se utiliza en muchos proyectos de procesamiento de lenguaje natural.
+
+    SpaCy proporciona una amplia gama de funcionalidades para el procesamiento de texto, que incluyen la tokenización de texto, el etiquetado gramatical, la desambiguación de sentido, la identificación de entidades, el análisis de dependencias, el análisis de sentimientos, el reconocimiento de frases y la generación de respuestas.
+
+    Además, SpaCy está diseñado para ser rápido y eficiente, lo que lo hace adecuado para el procesamiento de grandes volúmenes de texto. SpaCy también se integra bien con otras bibliotecas de Python como pandas, scikit-learn y matplotlib, lo que permite un análisis de texto más completo.
+
+    En resumen, SpaCy es una biblioteca de NLP en Python que permite a los desarrolladores procesar y analizar texto de manera eficiente y efectiva, lo que facilita el desarrollo de aplicaciones basadas en NLP, como la clasificación de texto, la extracción de información y la comprensión del lenguaje natural.
+
+    url: https://spacy.io/
+
+PANDAS: 
+
+    Pandas es una biblioteca de Python para la manipulación y el análisis de datos que proporciona una amplia gama de herramientas para trabajar con datos estructurados y series de tiempo. Pandas es una de las bibliotecas de Python más populares para el análisis de datos y se utiliza en muchos proyectos de ciencia de datos.
+
+    Pandas proporciona estructuras de datos de alto rendimiento y fáciles de usar, como DataFrames y Series, que permiten realizar operaciones de manipulación, agregación y filtrado de datos de manera eficiente. Pandas también proporciona herramientas para la limpieza y transformación de datos, como la eliminación de datos duplicados, la imputación de valores faltantes y el cambio de formato de datos.
+
+    Además, Pandas permite la integración con otras bibliotecas de Python como NumPy y Matplotlib, lo que permite una manipulación y visualización de datos más complejas.
+
+    En resumen, Pandas es una biblioteca de Python para la manipulación y el análisis de datos que proporciona una amplia gama de herramientas para trabajar con datos estructurados y series de tiempo. Pandas es una herramienta esencial para cualquier persona que trabaje con datos en Python, ya sea para análisis de datos, investigación científica, modelado estadístico o aprendizaje automático.
+
+    URL: https://pandas.pydata.org/

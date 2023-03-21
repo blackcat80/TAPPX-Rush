@@ -1,103 +1,51 @@
+import json                                                      # Libreria que usamos para manejar los datos de archivos json.
+import pandas as pd                                              # Libreria Pandas a Dataframe los json.
 
-import json
-
-from matplotlib.pyplot import text     #libreria para cargar los datos de  archivos JSON
-#import spacy    
-import pandas as pd
-
-
-# Cargar los datos del archivo de artículos de prensa
-
-with open('articles.json', 'r') as f:
+with open('articles.json', 'r') as f:                            # Leemos el json y almacenamos los datos en data_articulos.
     data_articulos = json.load(f)
 
-# Cargar los datos del archivo de vídeos
+with open('videos.json', 'r') as f:                              # Leemos el json y almacenamos los datos en data_videos.
+    data_videos = json.load(f)
 
-with open('videos.json', 'r') as f:
-    videos = json.load(f)
-# Almacenamos los id de los artículos
-# Almacenamos los textos de los artículos antes de limpiar
+data_articulos = pd.DataFrame(data_articulos).transpose()        # Comando pd.DataFrame para crear un dataframe con los datos de aricle.json 
+#print(data_articulos)                                           # línea comentada solo por si queremos comprobar todo el contenido del json en formato dataframe.
+data_videos = pd.DataFrame(data_videos).transpose()              # Lo mismo que para los videos.json 
+#print(data_videos)                                              # línea comentada solo por si queremos comprobar todo el contenido del json en formato dataframe.
 
-df = pd.DataFrame(data_articulos).transpose()
-# print(df['text'][0])
+def extraer_texto(dataframe, columns):
+    texto = []
+    for col in columns:
+        if col in dataframe.columns:
+            texto += dataframe[col].apply(lambda x: json.dumps(x) if isinstance(x, list) else str(x)).tolist()
+    return texto
 
+id_articulos = data_articulos.index.tolist()
+title_articulos = extraer_texto(data_articulos, ['title'])
+keywords_articulos = extraer_texto(data_articulos, ['keywords'])
+class_articulos = extraer_texto(data_articulos, ['categoriaIAB'])
+text_articulos = extraer_texto(data_articulos, ['text'])
+url_articulos = extraer_texto(data_articulos, ['url'])
 
-id_articulos = []  
+#print(id_articulos)      
+#print(title_articulos)
+#print(keywords_articulos)
+#print(class_articulos)  # pdte que solo imprima el valor, no todo. 
+#print(text_articulos)
+#print(url_articulos)
 
-for key, value in enumerate(data_articulos):
-    id_articulos.append(value)
-# print(id_articulos)
+id_videos = data_videos.index.tolist()
+keywords_videos = extraer_texto(data_videos, ['keywords'])
+class_videos = extraer_texto(data_videos, ['categoriaIAB'])
+text_videos = extraer_texto(data_videos, ['text'])
+url_videos = extraer_texto(data_videos, ['url'])
 
-
-
-def extraer_texto(dataframe, column):
-    texto_articulos =[] 
-
-    for key, value in enumerate(dataframe[column]):
-        texto_articulos.append(value)
-    return texto_articulos
-
-content = extraer_texto(df, 'title')
-for i in content:
-    print(i)
-
-
-
-"""for id_del_articulo in data_articulos:   
-    id_articulos.append(id_del_articulo)
-     for texto_articulo in [id_del_articulo]["text"]:
-
-           texto_articulos.append(texto_articulo)
-
-print(id_articulos)"""
-      
-
-#print(texto_articulos) 
-
-"""
-
-for id_del_articulo in articulos:   
-    id_articulos.append(id_del_articulo)
-    articulo = articulos[id_del_articulo]
-    
-
-#    texto = articulos['text']
-#    textos_articulos.append(texto)
-
-# Buscar las keywords y sus scores:
+#print(id_videos)   
+#print(keywords_videos)
+#print(class_videos)  # pdte que solo imprima el valor, no todo. 
+#print(text_videos)
+#print(url_videos)
 
 
-nlp = spacy.load('es_core_news_sm') 
+print(data_articulos.columns)
 
-keywords = {}
 
-for texto in textos_articulos:
-    doc = nlp(texto)
-    for token in doc:
-        if token.is_alpha and not token.is_stop:
-            if token.text in keywords:
-                keywords[token.text] += token.similarity(doc)
-            else:
-                keywords[token.text] = token.similarity(doc)
-
-# Enlazar los artículos con los vídeos: Iteramos la lista de diccionarios de vídeos y comparar 
-# los keywords de cada vídeo con los keywords de cada artículo para encontrar la mejor coincidencia.
-
-for video in videos:
-    keywords_video = set(video['keywords'])
-    mejor_score = 0
-    mejor_articulo = None
-
-    for articulo in articulos:
-        keywords_articulo = set(articulo['keywords'])
-        score = sum([keywords[token] for token in keywords_video & keywords_articulo])
-
-        if score > mejor_score:
-            mejor_score = score
-            mejor_articulo = articulo
-
-    video['mejor_articulo'] = mejor_articulo['titulo']
-
-print(textos_articulos)
-print(keywords)
-"""

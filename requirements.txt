@@ -1,5 +1,6 @@
 json
-spacy
+panda
+
 
 
 # estos ya veremos si los terminamos usando o no
@@ -7,6 +8,7 @@ torch
 matplotlib.pyplot
 nltk
 numpy
+spacy
 
 # para instalar las dependencias de Python listadas en el archivo requirement.txt usar:
 # pip install -r requirements.txt
