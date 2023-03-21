@@ -19,6 +19,12 @@ class File:
         self.text = self.extraer_texto(self.dataframe, ['text'])
         self.url = self.extraer_texto(self.dataframe, ['url'])
 
+        # To use with model https://huggingface.co/hiiamsid/sentence_similarity_spanish_es
+        # self.keywords_str = []
+        # for i in self.dataframe['keywords']:
+        #     self.keywords_str.append((' '.join(i)))
+        # self.dataframe['keywords_str'] = self.keywords_str
+
     def extraer_texto(self, dataframe, columns):
         texto = []
         for col in columns:
@@ -101,8 +107,6 @@ class File:
         """
         with open('entrega.json', "w+") as file:
             file.write(json.dumps(scores_dic, indent=4, sort_keys=True))
-
-
 
 
 
