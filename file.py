@@ -36,6 +36,8 @@ class File:
     def preprocess_text(text):
         # Preprocesamiento de texto
         stop_words = set(stopwords.words('spanish'))
+        stemmer = SnowballStemmer('spanish')
+        lemmatizer = WordNetLemmatizer()
 
         # Eliminar puntuación
         text = text.translate(str.maketrans('', '', string.punctuation))
@@ -45,24 +47,11 @@ class File:
         tokens = nltk.word_tokenize(text, language='spanish')
         # Eliminar stopwords
         tokens = [token for token in tokens if token not in stop_words]
+        # Aplicar stemming y lemmatization
+        tokens = [stemmer.stem(lemmatizer.lemmatize(token)) for token in tokens]
+        # print(tokens)
+
         return tokens
-
-
-    # Obtener scores de keywords en un texto (Christian Version)
-    def score_keywords(self, file):
-        keyword_scores = {}
-        for i in self.keywords:
-            keyword_tokens = self.preprocess_text(i)
-            for j in file.text:
-                keyword_scores[self.id[index]] = 0
-                video_tokens = self.preprocess_text(j)
-                total_words = len(video_tokens)
-                for token in video_tokens:
-                    if token in keyword_tokens:
-                        keyword_scores[i] += 1 / total_words
-            index += 1
-        print(keyword_scores)
-
 
 
     # Chrisitan Algorithm - (Ana iteration Version)
@@ -84,7 +73,10 @@ class File:
                 word_tokens = self.preprocess_text(file.text[index])
                 for token in word_tokens:
                     if token in keyword_tokens:
-                        keyword_scores[i][j]["score"] += 1 / total_words
+                        keyword_scores[i][j]["score"] += 1
+
+        print(json.dumps(keyword_scores, indent=4, sort_keys=True))
+        
         # Sort the files.id for each self.id
         for i in keyword_scores:
             keyword_scores[i] = dict(sorted(keyword_scores[i].items(), key=lambda x: x[1]["score"], reverse=True))
@@ -107,23 +99,3 @@ class File:
         """
         with open('entrega.json', "w+") as file:
             file.write(json.dumps(scores_dic, indent=4, sort_keys=True))
-
-
-
-    # # Obtener scores de keywords en un texto (Ana Version)
-    # def score_keywords_ana(self, file):
-    #     # For each article
-    #     dic = {}
-    #     for i in self.dataframe.index.tolist():
-    #         dic[i] = {}
-    #         # For each video
-    #         for j in file.dataframe.index.tolist():
-    #             dic[i] = {j:{}}
-    #             # For each keyword of article i
-    #             for k in self.dataframe['keywords'][i]:
-    #                 # Score function
-    #                 dic[i][j][k] = 0
-    #     print(dic)
-
-    # # Obtener scores de keywords en un texto (Ana Version)
-
