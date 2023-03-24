@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 from rake_nltk import Rake
 import re
 import json
+from tqdm import tqdm
 
 class File:
 
