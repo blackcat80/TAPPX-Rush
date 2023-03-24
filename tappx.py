@@ -4,6 +4,7 @@ import numpy as np
 from numpy.linalg import norm
 import string
 from sentence_transformers import SentenceTransformer
+import matplotlib.pyplot as plt
 from rake_nltk import Rake
 import re
 import json
@@ -98,8 +99,64 @@ class File:
         self.write_json(keyword_scores)
         return keyword_scores
 
+def visualizarer(data):
+    # Abrir y cargar el archivo JSON
+    with open('entrega.json') as f:
+        data = json.load(f)
+    # Crear listas vacías para almacenar los valores
+    articulos = []
+    video1_scores = []
+    video2_scores = []
+    for key in data:
+        # Agregar el identificador del artículo a la lista
+        articulos.append(key)
+        # Verificar si el artículo tiene ambos videos
+        video_keys = [k for k in data[key].keys() if 'video' in k]
+        if len(video_keys) == 2:
+            # Obtener los puntajes de los dos videos asociados al artículo
+            video1_score = data[key][video_keys[0]]['score']
+            video2_score = data[key][video_keys[1]]['score']
+            # Agregar los puntajes a las listas correspondientes
+            video1_scores.append(video1_score)
+            video2_scores.append(video2_score)
+    # Definir la cantidad de filas y columnas
+    num_filas = 4
+    num_cols = 3
+    # Definir el tamaño de la figura
+    fig, axs = plt.subplots(num_filas, num_cols, figsize=(15, 15))
+    # Crear el gráfico de barras para cada artículo
+    for i, key in enumerate(articulos):
+        # Verificar si el artículo tiene ambos videos
+        if i < len(video1_scores) and i < len(video2_scores):
+            # Obtener los puntajes de los dos videos asociados al artículo
+            video1_score = video1_scores[i]
+            video2_score = video2_scores[i]
+            # Obtener las coordenadas del subplot correspondiente
+            row = i // num_cols
+            col = i % num_cols
+            # Crear las etiquetas de las barras
+            labels =[list(data[key])[0], list(data[key])[1]]
+            # Crear el gráfico de barras con dos columnas
+            axs[row, col].bar(labels, [video1_score, video2_score], width=0.8)
+            # Añadir etiquetas y título
+            axs[row, col].set_ylabel('Scores % ', fontsize=7)
+            axs[row, col].set_title(f'Artículo: {articulos[i]}', fontsize=7, fontweight='bold')
+            # Cambiar las etiquetas del eje y
+            axs[row, col].set_yticks([0, 25, 50, 75, 100])
+            axs[row, col].set_yticklabels(['0%', '25%', '50%', '75%', '100%'], fontsize=6)
+            # Cambiar el tamaño de las etiquetas del eje x
+            axs[row, col].tick_params(axis='x', labelsize=6)
+    # Ajustar los espacios entre subplots
+    plt.subplots_adjust(hspace=0.8, wspace=0.4)
+    # Código para crear los subplots y graficar los datos...
+    fig.suptitle('Best 2 videos match with the article', fontsize=16, fontweight='bold')
+    # Mostrar el gráfico
+    plt.show()
+        
+
 if __name__ == "__main__":
     articles = File("articles")
     videos   = File("videos")
     
     articles.best_match(videos)
+    visualizarer(File)
