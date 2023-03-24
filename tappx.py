@@ -1,7 +1,6 @@
 import pandas as pd
 import json
 import numpy as np
-#import nltk
 from numpy.linalg import norm
 import string
 from sentence_transformers import SentenceTransformer
