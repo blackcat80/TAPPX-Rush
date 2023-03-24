@@ -38,3 +38,5 @@ Para el procesamiento de los archivos json, se crean dos objetos de la clase Fil
 Se registra las dependencias por pip freeze y se redirecciona el output al archivo requirements.txt para una fácil instalación de las mismas.
 
 Es importante mencionar que debido al tiempo de ejecución del programa, se facilita el archivo entrega.json con los resultados ya obtenidos.
+
+Miembros del proyecto: Ana R., Nil B. y Christian S.
