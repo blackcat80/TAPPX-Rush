@@ -8,7 +8,6 @@ from sentence_transformers import SentenceTransformer
 from rake_nltk import Rake
 import re
 import json
-import matplotlib.pyplot as plt
 
 class File:
 
