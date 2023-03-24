@@ -1,53 +1,40 @@
-OBJETIVO RETO:
+README:
 
-El objetivo es asignar un conjunto de vídeos de los que se encuentran en videos.json a cada artículo de los que se encuentra en articulos.json. 
-Los vídeos que se asignan a cada artículo deben tener relación de contexto con este.
+Este proyecto tiene como objetivo asignar un conjunto de vídeos a cada artículo en función de su contexto. Para esto, se utiliza un archivo json de artículos y otro archivo json de vídeos, los cuales contienen información relevante acerca de cada uno de ellos.
 
-• El reto tiene que entregarse en un archivo comprimido con los siguientes elementos:
-    ◦ Todo el código y dependencias.
-    ◦ Archivo de requerimientos.
-    ◦ Un archivo json con las características mencionadas en el apartado entrega.
-    ◦ Un archivo README.txt con la explicación del funcionamiento del programa, la definición del score y cualquier otra información que se considere relevante.
+Para ejecutar el programa, se debe compilar el archivo tappx.py con Python 3 mediante el comando "python3 tappx.py". Una vez finalizado el proceso, se generará un archivo entrega.json con los resultados del emparejamiento.
 
-
-INSTRUCCIONES - Estructura del proyecto
-
-1. Crear archivo requirements.txt (a traves de 'pip install -r requirements.txt', este se encargara de instalar las dependencias usadas en el programa)
-
-2. Crear archivo README.txt (en el explicaremos el objetivo y funcionamiento del programa, la definicion del score y toda información relevante)
-
-3. Creamos un archivo tappx.py (en el que ejecutaremos nuestro código)
-
-4. Extraer los datos de los archivos JSON (en concreto las id de los articulos, las keywords y los textos asociados), y guardar los textos en una lista
-
-5. Limpiar los textos extraídos, gramatica y semánticamente. 
-
-6. Buscar las keywords y sus scores. (Podemos usar una librería de PLN (procesamiento de lenguaje natural), como 'spacy' para procesar los textos
-   y extraer sus keywords y  sus scores)
-
-7. Enlazar los artículos con los vídeos: (mínimo 2 vídeos por articulo). Podemos iterar sobre la lista de diccionarios de vídeos y comparar los keywords de cada vídeo con los keywords de cada
-   artículo para encontrar la mejor coincidencia. (quizás podemos hacer un .join de las keywords generadas por nosotros con las dadas en los archivos json)
-
-8. Por último crear un arhivo entrega.json con dichas asignaciones con el siguiente formato:
-
+El archivo entrega.json tiene el siguiente formato:
     {
-        "id-del-articulo1": {
-            "id_del_video_relacionado1": {
-                "score":"score-de-la-relación"
-            },
-            "id_del_video_relacionado2":{
-                "score":"score-de-la-relación"
-            },
-            .
-            .            
+    "id-del-articulo1": {
+        "id_del_video_relacionado1": {
+            "score":"score-de-la-relación"
         },
-        "id-del-articulo2": {
-            "id_del_video_relacionado1": {
-                "score":"score-de-la-relacion"
-            },
-            .   
-            .            
-        }
+        "id_del_video_relacionado2":{
+            "score":"score-de-la-relación"
+        },
         .
-        .        
+        .            
+    },
+    "id-del-articulo2": {
+        "id_del_video_relacionado1": {
+            "score":"score-de-la-relacion"
+        },
+        .   
+        .            
     }
+    .
+    .        
+}
+
+La lógica utilizada para calcular el score se basa en la similitud vectorial del coseno ('cosine similarity') entre las keywords del artículo y las keywords del video. Para ello, se utilizan dos modelos pre-entrenados: BERT para la creación de vectores y Rake para la obtención de nuevas keywords. Además, se considera el título del artículo en la comparación.
+
+El score tiene un rango entre 0 y 100, siendo 100 la relación más cercana entre el artículo y el video.
+
+El código se encuentra organizado en una clase File, la cual recibe como parámetro el nombre del archivo json y crea un dataframe a partir de los datos. Además, se generan nuevas keywords utilizando el algoritmo Rake y se añaden al dataframe.
+
+Para el procesamiento de los archivos json, se crean dos objetos de la clase File: 'articles' y 'videos'. Luego, se llama a la función 'best_match' del objeto 'articles' para generar el archivo entrega.json con el emparejamiento de artículos y videos.
+
+Se registra las dependencias por pip freeze y se redirecciona el output al archivo requirements.txt para una fácil instalación de las mismas.
+
+Es importante mencionar que debido al tiempo de ejecución del programa, se facilita el archivo entrega.json con los resultados ya obtenidos.
