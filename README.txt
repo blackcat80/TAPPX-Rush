@@ -1,10 +1,10 @@
 README:
 
-Este proyecto tiene como objetivo asignar un conjunto de vídeos a cada artículo en función de su contexto. Para esto, se utiliza un archivo json de artículos y otro archivo json de vídeos, los cuales contienen información relevante acerca de cada uno de ellos.
+This project aims to assign a set of videos to each article based on its context. For this, a json file of articles and another json file of videos are used, which contain relevant information about each one of them.
 
-Para ejecutar el programa, se debe compilar el archivo tappx.py con Python 3 mediante el comando "python3 tappx.py". Una vez finalizado el proceso, se generará un archivo entrega.json con los resultados del emparejamiento.
+To run the program, the tappx.py file must be compiled with Python 3 using the "python3 tappx.py" command. Once the process is finished, a entrega.json file will be generated with the matching results.
 
-El archivo entrega.json tiene el siguiente formato:
+The entrega.json file has the following format:
     {
     "id-del-articulo1": {
         "id_del_video_relacionado1": {
@@ -27,16 +27,16 @@ El archivo entrega.json tiene el siguiente formato:
     .        
 }
 
-La lógica utilizada para calcular el score se basa en la similitud vectorial del coseno ('cosine similarity') entre las keywords del artículo y las keywords del video. Para ello, se utilizan dos modelos pre-entrenados: BERT para la creación de vectores y Rake para la obtención de nuevas keywords. Además, se considera el título del artículo en la comparación.
+The logic used to calculate the score is based on the vectorial similarity of the cosine ('cosine similarity') between the keywords of the article and the keywords of the video. For this, two pre-trained models are used: BERT for the creation of vectors and Rake for obtaining new keywords. In addition, the title of the article is considered in the comparison.
 
-El score tiene un rango entre 0 y 100, siendo 100 la relación más cercana entre el artículo y el video.
+The score has a range between 0 and 100, with 100 being the closest relationship between the article and the video.
 
-El código se encuentra organizado en una clase File, la cual recibe como parámetro el nombre del archivo json y crea un dataframe a partir de los datos. Además, se generan nuevas keywords utilizando el algoritmo Rake y se añaden al dataframe.
+The code is organized in a File class, which receives the name of the json file as a parameter and creates a dataframe from the data. Also, new keywords are generated using the Rake algorithm and added to the dataframe.
 
-Para el procesamiento de los archivos json, se crean dos objetos de la clase File: 'articles' y 'videos'. Luego, se llama a la función 'best_match' del objeto 'articles' para generar el archivo entrega.json con el emparejamiento de artículos y videos.
+For the processing of the json files, two objects of the File class are created: 'articles' and 'videos'. Then, the 'best_match' function of the 'articles' object is called to generate the delivery.json file with the article and video pairing.
 
-Se registra las dependencias por pip freeze y se redirecciona el output al archivo requirements.txt para una fácil instalación de las mismas.
+Dependencies are registered by pip freeze and the output is redirected to the requirements.txt file for easy installation.
 
-Es importante mencionar que debido al tiempo de ejecución del programa, se facilita el archivo entrega.json con los resultados ya obtenidos.
+It is important to mention that due to the execution time of the program, the entrega.json file is provided with the results already obtained.
 
-Miembros del proyecto: Ana R., Nil B. y Christian S.
+Project members: Ana R., Nil B. and Christian S.
